@@ -1,0 +1,758 @@
+{
+	"info": {
+		"_postman_id": "54fb6deb-412f-4619-ae40-0d63354dd543",
+		"name": "VAR_automation",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Verifying the response by giving wrong Platform header",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "22bb2ec9-6bc7-4350-b516-3557a4b906cf",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "d1252722-51d8-4bc2-aa19-7dea26e382d0",
+						"exec": [
+							"pm.test(\"Body is correct\", function () {\r",
+							"    pm.response.to.have.body(\"No such platform present\");\r",
+							"});\r",
+							"pm.test(\"Status code is 404\", function () {\r",
+							"    pm.response.to.have.status(404);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "x-api-client",
+						"value": "U1e9OXjEdPrK1lQdYvlZxLooLKRjyO0xvD1NJJuc",
+						"type": "text"
+					},
+					{
+						"key": "x-platform",
+						"value": "android1",
+						"type": "text"
+					},
+					{
+						"key": "x-country",
+						"value": "IN",
+						"type": "text"
+					},
+					{
+						"key": "x-country",
+						"value": "IN",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"url": {
+					"raw": "{{BASE_URL}}/api/v1/core/pages/34?user_state=guest",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"core",
+						"pages",
+						"34"
+					],
+					"query": [
+						{
+							"key": "user_state",
+							"value": "guest"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PageAPI",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": ""
+				},
+				"description": "Validate Page api gives response "
+			},
+			"response": []
+		},
+		{
+			"name": "Verify the response for invalid x-api-client",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "614dd5b0-d707-4de9-87b4-45871dde057b",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(401);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "x-api-client",
+						"value": "U1e9OXjEdPrK1lQdYvlZxLooLKRjyO0xvD1NJJuc1",
+						"type": "text"
+					},
+					{
+						"key": "x-platform",
+						"value": "android",
+						"type": "text"
+					},
+					{
+						"key": "x-country",
+						"value": "IN",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{BASE_URL}}/api/v1/core/pages/34?user_state=guest",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"core",
+						"pages",
+						"34"
+					],
+					"query": [
+						{
+							"key": "user_state",
+							"value": "guest"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "content_detail_api",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "5847c2ec-9c12-4b5e-9f6a-fe08b3a2e81f",
+						"exec": [
+							"var jsonResponse  =pm.response.json\r",
+							"var schema= {\r",
+							"    \"$schema\": \"http://json-schema.org/draft-07/schema\",\r",
+							"    \"$id\": \"http://example.com/example.json\",\r",
+							"    \"type\": \"object\",\r",
+							"    \"title\": \"The root schema\",\r",
+							"    \"description\": \"The root schema comprises the entire JSON document.\",\r",
+							"    \"required\": [\r",
+							"        \"status\",\r",
+							"        \"message\",\r",
+							"        \"status_code\",\r",
+							"        \"data\"\r",
+							"    ],\r",
+							"    \"properties\": {\r",
+							"        \"status\": {\r",
+							"            \"$id\": \"#/properties/status\",\r",
+							"            \"type\": \"string1\",\r",
+							"            \"title\": \"The status schema\",\r",
+							"            \"description\": \"An explanation about the purpose of this instance.\"\r",
+							"        },\r",
+							"        \"message\": {\r",
+							"            \"$id\": \"#/properties/message\",\r",
+							"            \"type\": \"null\",\r",
+							"            \"title\": \"The message schema\",\r",
+							"            \"description\": \"An explanation about the purpose of this instance.\"\r",
+							"        },\r",
+							"        \"status_code\": {\r",
+							"            \"$id\": \"#/properties/status_code\",\r",
+							"            \"type\": \"null\",\r",
+							"            \"title\": \"The status_code schema\",\r",
+							"            \"description\": \"An explanation about the purpose of this instance.\"\r",
+							"        },\r",
+							"        \"data\": {\r",
+							"            \"$id\": \"#/properties/data\",\r",
+							"            \"type\": \"object\",\r",
+							"            \"title\": \"The data schema\",\r",
+							"            \"description\": \"An explanation about the purpose of this instance.\",\r",
+							"            \"required\": [\r",
+							"                \"content_id\",\r",
+							"                \"content_title\",\r",
+							"                \"content_type\",\r",
+							"                \"content_type_id\",\r",
+							"                \"release_date\",\r",
+							"                \"asset_id\",\r",
+							"                \"asset_type\",\r",
+							"                \"asset_title\",\r",
+							"                \"asset_sub_type\",\r",
+							"                \"images\",\r",
+							"                \"description\",\r",
+							"                \"sequence_no\",\r",
+							"                \"language\",\r",
+							"                \"duration\",\r",
+							"                \"labels\",\r",
+							"                \"genres\",\r",
+							"                \"audio_languages\",\r",
+							"                \"marker\",\r",
+							"                \"ctas\",\r",
+							"                \"cast_crew\",\r",
+							"                \"keywords\",\r",
+							"                \"subtitles\",\r",
+							"                \"user_rating\",\r",
+							"                \"is_watchlisted\",\r",
+							"                \"play_state\"\r",
+							"            ],\r",
+							"            \"properties\": {\r",
+							"                \"content_id\": {\r",
+							"                    \"$id\": \"#/properties/data/properties/content_id\",\r",
+							"                    \"type\": \"integer\",\r",
+							"                    \"title\": \"The content_id schema\",\r",
+							"                    \"description\": \"An explanation about the purpose of this instance.\"\r",
+							"                },\r",
+							"                \"content_title\": {\r",
+							"                    \"$id\": \"#/properties/data/properties/content_title\",\r",
+							"                    \"type\": \"string\",\r",
+							"                    \"title\": \"The content_title schema\",\r",
+							"                    \"description\": \"An explanation about the purpose of this instance.\"\r",
+							"                },\r",
+							"                \"content_type\": {\r",
+							"                    \"$id\": \"#/properties/data/properties/content_type\",\r",
+							"                    \"type\": \"string\",\r",
+							"                    \"title\": \"The content_type schema\",\r",
+							"                    \"description\": \"An explanation about the purpose of this instance.\"\r",
+							"                },\r",
+							"                \"content_type_id\": {\r",
+							"                    \"$id\": \"#/properties/data/properties/content_type_id\",\r",
+							"                    \"type\": \"integer\",\r",
+							"                    \"title\": \"The content_type_id schema\",\r",
+							"                    \"description\": \"An explanation about the purpose of this instance.\"\r",
+							"                },\r",
+							"                \"release_date\": {\r",
+							"                    \"$id\": \"#/properties/data/properties/release_date\",\r",
+							"                    \"type\": \"string\",\r",
+							"                    \"title\": \"The release_date schema\",\r",
+							"                    \"description\": \"An explanation about the purpose of this instance.\"\r",
+							"                },\r",
+							"                \"asset_id\": {\r",
+							"                    \"$id\": \"#/properties/data/properties/asset_id\",\r",
+							"                    \"type\": \"integer\",\r",
+							"                    \"title\": \"The asset_id schema\",\r",
+							"                    \"description\": \"An explanation about the purpose of this instance.\"\r",
+							"                },\r",
+							"                \"asset_type\": {\r",
+							"                    \"$id\": \"#/properties/data/properties/asset_type\",\r",
+							"                    \"type\": \"string\",\r",
+							"                    \"title\": \"The asset_type schema\",\r",
+							"                    \"description\": \"An explanation about the purpose of this instance.\"\r",
+							"                },\r",
+							"                \"asset_title\": {\r",
+							"                    \"$id\": \"#/properties/data/properties/asset_title\",\r",
+							"                    \"type\": \"string\",\r",
+							"                    \"title\": \"The asset_title schema\",\r",
+							"                    \"description\": \"An explanation about the purpose of this instance.\"\r",
+							"                },\r",
+							"                \"asset_sub_type\": {\r",
+							"                    \"$id\": \"#/properties/data/properties/asset_sub_type\",\r",
+							"                    \"type\": \"string\",\r",
+							"                    \"title\": \"The asset_sub_type schema\",\r",
+							"                    \"description\": \"An explanation about the purpose of this instance.\"\r",
+							"                },\r",
+							"                \"images\": {\r",
+							"                    \"$id\": \"#/properties/data/properties/images\",\r",
+							"                    \"type\": \"null\",\r",
+							"                    \"title\": \"The images schema\",\r",
+							"                    \"description\": \"An explanation about the purpose of this instance.\"\r",
+							"                },\r",
+							"                \"description\": {\r",
+							"                    \"$id\": \"#/properties/data/properties/description\",\r",
+							"                    \"type\": \"string\",\r",
+							"                    \"title\": \"The description schema\",\r",
+							"                    \"description\": \"An explanation about the purpose of this instance.\"\r",
+							"                },\r",
+							"                \"sequence_no\": {\r",
+							"                    \"$id\": \"#/properties/data/properties/sequence_no\",\r",
+							"                    \"type\": \"integer\",\r",
+							"                    \"title\": \"The sequence_no schema\",\r",
+							"                    \"description\": \"An explanation about the purpose of this instance.\"\r",
+							"                },\r",
+							"                \"language\": {\r",
+							"                    \"$id\": \"#/properties/data/properties/language\",\r",
+							"                    \"type\": \"array\",\r",
+							"                    \"title\": \"The language schema\",\r",
+							"                    \"description\": \"An explanation about the purpose of this instance.\",\r",
+							"                    \"items\": {\r",
+							"                        \"$id\": \"#/properties/data/properties/language/items\",\r",
+							"                        \"anyOf\": [\r",
+							"                            {\r",
+							"                                \"$id\": \"#/properties/data/properties/language/items/anyOf/0\",\r",
+							"                                \"type\": \"object\",\r",
+							"                                \"title\": \"The first anyOf schema\",\r",
+							"                                \"description\": \"An explanation about the purpose of this instance.\",\r",
+							"                                \"required\": [\r",
+							"                                    \"code\",\r",
+							"                                    \"name\"\r",
+							"                                ],\r",
+							"                                \"properties\": {\r",
+							"                                    \"code\": {\r",
+							"                                        \"$id\": \"#/properties/data/properties/language/items/anyOf/0/properties/code\",\r",
+							"                                        \"type\": \"string\",\r",
+							"                                        \"title\": \"The code schema\",\r",
+							"                                        \"description\": \"An explanation about the purpose of this instance.\"\r",
+							"                                    },\r",
+							"                                    \"name\": {\r",
+							"                                        \"$id\": \"#/properties/data/properties/language/items/anyOf/0/properties/name\",\r",
+							"                                        \"type\": \"string\",\r",
+							"                                        \"title\": \"The name schema\",\r",
+							"                                        \"description\": \"An explanation about the purpose of this instance.\"\r",
+							"                                    }\r",
+							"                                },\r",
+							"                                \"additionalProperties\": true\r",
+							"                            }\r",
+							"                        ]\r",
+							"                    }\r",
+							"                },\r",
+							"                \"duration\": {\r",
+							"                    \"$id\": \"#/properties/data/properties/duration\",\r",
+							"                    \"type\": \"integer\",\r",
+							"                    \"title\": \"The duration schema\",\r",
+							"                    \"description\": \"An explanation about the purpose of this instance.\"\r",
+							"                },\r",
+							"                \"labels\": {\r",
+							"                    \"$id\": \"#/properties/data/properties/labels\",\r",
+							"                    \"type\": \"null\",\r",
+							"                    \"title\": \"The labels schema\",\r",
+							"                    \"description\": \"An explanation about the purpose of this instance.\"\r",
+							"                },\r",
+							"                \"genres\": {\r",
+							"                    \"$id\": \"#/properties/data/properties/genres\",\r",
+							"                    \"type\": \"null\",\r",
+							"                    \"title\": \"The genres schema\",\r",
+							"                    \"description\": \"An explanation about the purpose of this instance.\"\r",
+							"                },\r",
+							"                \"audio_languages\": {\r",
+							"                    \"$id\": \"#/properties/data/properties/audio_languages\",\r",
+							"                    \"type\": \"null\",\r",
+							"                    \"title\": \"The audio_languages schema\",\r",
+							"                    \"description\": \"An explanation about the purpose of this instance.\"\r",
+							"                },\r",
+							"                \"marker\": {\r",
+							"                    \"$id\": \"#/properties/data/properties/marker\",\r",
+							"                    \"type\": \"null\",\r",
+							"                    \"title\": \"The marker schema\",\r",
+							"                    \"description\": \"An explanation about the purpose of this instance.\"\r",
+							"                },\r",
+							"                \"ctas\": {\r",
+							"                    \"$id\": \"#/properties/data/properties/ctas\",\r",
+							"                    \"type\": \"array\",\r",
+							"                    \"title\": \"The ctas schema\",\r",
+							"                    \"description\": \"An explanation about the purpose of this instance.\",\r",
+							"                    \"items\": {\r",
+							"                        \"$id\": \"#/properties/data/properties/ctas/items\",\r",
+							"                        \"anyOf\": [\r",
+							"                            {\r",
+							"                                \"$id\": \"#/properties/data/properties/ctas/items/anyOf/0\",\r",
+							"                                \"type\": \"object\",\r",
+							"                                \"title\": \"The first anyOf schema\",\r",
+							"                                \"description\": \"An explanation about the purpose of this instance.\",\r",
+							"                                \"required\": [\r",
+							"                                    \"cta_label\",\r",
+							"                                    \"cta_selected_state\",\r",
+							"                                    \"cta_type\",\r",
+							"                                    \"web_url\",\r",
+							"                                    \"deeplink_url\"\r",
+							"                                ],\r",
+							"                                \"properties\": {\r",
+							"                                    \"cta_label\": {\r",
+							"                                        \"$id\": \"#/properties/data/properties/ctas/items/anyOf/0/properties/cta_label\",\r",
+							"                                        \"type\": \"string\",\r",
+							"                                        \"title\": \"The cta_label schema\",\r",
+							"                                        \"description\": \"An explanation about the purpose of this instance.\"\r",
+							"                                    },\r",
+							"                                    \"cta_selected_state\": {\r",
+							"                                        \"$id\": \"#/properties/data/properties/ctas/items/anyOf/0/properties/cta_selected_state\",\r",
+							"                                        \"type\": \"boolean\",\r",
+							"                                        \"title\": \"The cta_selected_state schema\",\r",
+							"                                        \"description\": \"An explanation about the purpose of this instance.\"\r",
+							"                                    },\r",
+							"                                    \"cta_type\": {\r",
+							"                                        \"$id\": \"#/properties/data/properties/ctas/items/anyOf/0/properties/cta_type\",\r",
+							"                                        \"type\": \"string\",\r",
+							"                                        \"title\": \"The cta_type schema\",\r",
+							"                                        \"description\": \"An explanation about the purpose of this instance.\"\r",
+							"                                    },\r",
+							"                                    \"web_url\": {\r",
+							"                                        \"$id\": \"#/properties/data/properties/ctas/items/anyOf/0/properties/web_url\",\r",
+							"                                        \"type\": \"null\",\r",
+							"                                        \"title\": \"The web_url schema\",\r",
+							"                                        \"description\": \"An explanation about the purpose of this instance.\"\r",
+							"                                    },\r",
+							"                                    \"deeplink_url\": {\r",
+							"                                        \"$id\": \"#/properties/data/properties/ctas/items/anyOf/0/properties/deeplink_url\",\r",
+							"                                        \"type\": \"string\",\r",
+							"                                        \"title\": \"The deeplink_url schema\",\r",
+							"                                        \"description\": \"An explanation about the purpose of this instance.\"\r",
+							"                                    }\r",
+							"                                },\r",
+							"                                \"additionalProperties\": true\r",
+							"                            }\r",
+							"                        ]\r",
+							"                    }\r",
+							"                },\r",
+							"                \"cast_crew\": {\r",
+							"                    \"$id\": \"#/properties/data/properties/cast_crew\",\r",
+							"                    \"type\": \"null\",\r",
+							"                    \"title\": \"The cast_crew schema\",\r",
+							"                    \"description\": \"An explanation about the purpose of this instance.\"\r",
+							"                },\r",
+							"                \"keywords\": {\r",
+							"                    \"$id\": \"#/properties/data/properties/keywords\",\r",
+							"                    \"type\": \"null\",\r",
+							"                    \"title\": \"The keywords schema\",\r",
+							"                    \"description\": \"An explanation about the purpose of this instance.\"\r",
+							"                },\r",
+							"                \"subtitles\": {\r",
+							"                    \"$id\": \"#/properties/data/properties/subtitles\",\r",
+							"                    \"type\": \"null\",\r",
+							"                    \"title\": \"The subtitles schema\",\r",
+							"                    \"description\": \"An explanation about the purpose of this instance.\"\r",
+							"                },\r",
+							"                \"user_rating\": {\r",
+							"                    \"$id\": \"#/properties/data/properties/user_rating\",\r",
+							"                    \"type\": \"null\",\r",
+							"                    \"title\": \"The user_rating schema\",\r",
+							"                    \"description\": \"An explanation about the purpose of this instance.\"\r",
+							"                },\r",
+							"                \"is_watchlisted\": {\r",
+							"                    \"$id\": \"#/properties/data/properties/is_watchlisted\",\r",
+							"                    \"type\": \"boolean\",\r",
+							"                    \"title\": \"The is_watchlisted schema\",\r",
+							"                    \"description\": \"An explanation about the purpose of this instance.\"\r",
+							"                },\r",
+							"                \"play_state\": {\r",
+							"                    \"$id\": \"#/properties/data/properties/play_state\",\r",
+							"                    \"type\": \"object\",\r",
+							"                    \"title\": \"The play_state schema\",\r",
+							"                    \"description\": \"An explanation about the purpose of this instance.\",\r",
+							"                    \"required\": [\r",
+							"                        \"content_id\",\r",
+							"                        \"content_type\",\r",
+							"                        \"content_type_id\",\r",
+							"                        \"content_title\",\r",
+							"                        \"progress\",\r",
+							"                        \"progress_percent\",\r",
+							"                        \"last_updated_at\",\r",
+							"                        \"asset_id\",\r",
+							"                        \"asset_title\",\r",
+							"                        \"button_text\"\r",
+							"                    ],\r",
+							"                    \"properties\": {\r",
+							"                        \"content_id\": {\r",
+							"                            \"$id\": \"#/properties/data/properties/play_state/properties/content_id\",\r",
+							"                            \"type\": \"integer\",\r",
+							"                            \"title\": \"The content_id schema\",\r",
+							"                            \"description\": \"An explanation about the purpose of this instance.\"\r",
+							"                        },\r",
+							"                        \"content_type\": {\r",
+							"                            \"$id\": \"#/properties/data/properties/play_state/properties/content_type\",\r",
+							"                            \"type\": \"string\",\r",
+							"                            \"title\": \"The content_type schema\",\r",
+							"                            \"description\": \"An explanation about the purpose of this instance.\"\r",
+							"                        },\r",
+							"                        \"content_type_id\": {\r",
+							"                            \"$id\": \"#/properties/data/properties/play_state/properties/content_type_id\",\r",
+							"                            \"type\": \"integer\",\r",
+							"                            \"title\": \"The content_type_id schema\",\r",
+							"                            \"description\": \"An explanation about the purpose of this instance.\"\r",
+							"                        },\r",
+							"                        \"content_title\": {\r",
+							"                            \"$id\": \"#/properties/data/properties/play_state/properties/content_title\",\r",
+							"                            \"type\": \"string\",\r",
+							"                            \"title\": \"The content_title schema\",\r",
+							"                            \"description\": \"An explanation about the purpose of this instance.\"\r",
+							"                        },\r",
+							"                        \"progress\": {\r",
+							"                            \"$id\": \"#/properties/data/properties/play_state/properties/progress\",\r",
+							"                            \"type\": \"integer\",\r",
+							"                            \"title\": \"The progress schema\",\r",
+							"                            \"description\": \"An explanation about the purpose of this instance.\"\r",
+							"                        },\r",
+							"                        \"progress_percent\": {\r",
+							"                            \"$id\": \"#/properties/data/properties/play_state/properties/progress_percent\",\r",
+							"                            \"type\": \"integer\",\r",
+							"                            \"title\": \"The progress_percent schema\",\r",
+							"                            \"description\": \"An explanation about the purpose of this instance.\"\r",
+							"                        },\r",
+							"                        \"last_updated_at\": {\r",
+							"                            \"$id\": \"#/properties/data/properties/play_state/properties/last_updated_at\",\r",
+							"                            \"type\": \"null\",\r",
+							"                            \"title\": \"The last_updated_at schema\",\r",
+							"                            \"description\": \"An explanation about the purpose of this instance.\"\r",
+							"                        },\r",
+							"                        \"asset_id\": {\r",
+							"                            \"$id\": \"#/properties/data/properties/play_state/properties/asset_id\",\r",
+							"                            \"type\": \"integer\",\r",
+							"                            \"title\": \"The asset_id schema\",\r",
+							"                            \"description\": \"An explanation about the purpose of this instance.\"\r",
+							"                        },\r",
+							"                        \"asset_title\": {\r",
+							"                            \"$id\": \"#/properties/data/properties/play_state/properties/asset_title\",\r",
+							"                            \"type\": \"string\",\r",
+							"                            \"title\": \"The asset_title schema\",\r",
+							"                            \"description\": \"An explanation about the purpose of this instance.\"\r",
+							"                        },\r",
+							"                        \"button_text\": {\r",
+							"                            \"$id\": \"#/properties/data/properties/play_state/properties/button_text\",\r",
+							"                            \"type\": \"string\",\r",
+							"                            \"title\": \"The button_text schema\",\r",
+							"                            \"description\": \"An explanation about the purpose of this instance.\"\r",
+							"                        }\r",
+							"                    },\r",
+							"                    \"additionalProperties\": true\r",
+							"                }\r",
+							"            },\r",
+							"            \"additionalProperties\": true\r",
+							"        }\r",
+							"    },\r",
+							"    \"additionalProperties\": true\r",
+							"}\r",
+							"var jsonResponse = pm.response.json();\r",
+							"// pm.test('Schema is valid', function() {\r",
+							"// pm.expect(tv4.validate(jsonResponse, schema)).to.be.true;\r",
+							"// // //   tests[\"Testing schema\"] = tv4.validate(jsonResponse, schema);\r",
+							"// // console.log(\"Validation errors: \", pm.error);\r",
+							"// //pm.environment.get(\"variable_key\");\r",
+							" pm.test(\"Validate schema\", () => {\r",
+							"     var valid = tv4.validate(jsonResponse,schema,false,true);\r",
+							"if(valid!== true)\r",
+							"{\r",
+							"pm.response.to.have.jsonSchema(schema); \r",
+							"//console\r",
+							"}\r",
+							"\r",
+							"\r",
+							"\r",
+							"   \r",
+							"\r",
+							"// //console.log(pm.error.datapath)\r",
+							"\r",
+							"});\r",
+							"\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "x-api-client",
+						"value": "{{X-API-CLIENT}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{BASE_URL}}/api/v1/core/assets/6131411/contents/6143375",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"core",
+						"assets",
+						"6131411",
+						"contents",
+						"6143375"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "content_detail API-Verify the content blocked for country is not shown in the response",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "d4c4a84e-3d78-4060-935a-7fc1e82fe0e7",
+						"exec": [
+							"\r",
+							"pm.test(\"Body matches String -empty response form search\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"empty response from search\");\r",
+							"});\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(404);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "x-api-client",
+						"value": "{{X-API-CLIENT}}",
+						"type": "text"
+					},
+					{
+						"key": "x-country",
+						"value": "US",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{BASE_URL}}/api/v1/core/assets/6131411/contents/6143375",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"core",
+						"assets",
+						"6131411",
+						"contents",
+						"6143375"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Verify the content -platform blocked is not shown in the response",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "x-api-client",
+						"value": "{{X-API-CLIENT}}",
+						"type": "text"
+					},
+					{
+						"key": "x-platform",
+						"value": "web",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{BASE_URL}}/api/v1/core/assets/6131411/contents/6143375",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"core",
+						"assets",
+						"6131411",
+						"contents",
+						"6143375"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "verify the x-api-client value in the header",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "b00c2d83-00b2-430a-a033-a14ffa115005",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "e82f86ce-b4b8-4455-9c31-88c7a3c21d49",
+						"exec": [
+							"\r",
+							"// // var token = request.headers['x-api-token'];\r",
+							"// // console.log(token);\r",
+							"// // pm.test(\"invalid token\",function(){\r",
+							"// //     pm.expect(request.headers.token)to.eql(\"x-api-token\");\r",
+							"// // });\r",
+							"// // pm.test(\"Content-Type is present\", function () {\r",
+							"// //     pm.response.to.have.header(\"Content-Type\");\r",
+							"// // });\r",
+							"// // var token = \"x-api-token\";\r",
+							"// // pm.test(\"x-api-token-is-present\", function () {\r",
+							"// // pm.request.to.have.header(token);  \r",
+							"// // });\r",
+							"\r",
+							"// pm.test(\"Redirect location is correct\", function () {\r",
+							"//    pm.response.to.have.header(\"x-api-token\");\r",
+							"//    pm.response.to.be.header(\"x-api-token\", \"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1dWlkIjoxNTczNTUwMTI4MzM4LCJleHAiOjE2MTAwMDMyMzN9.-cI1M39pCzEptLr-SqU6Lpf4Yf-OAmDA4U0sDA5Vmjw\");\r",
+							"// });\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "x-api-client",
+						"value": "{{X-API-CLIENT}}",
+						"type": "text"
+					},
+					{
+						"key": "x-api-token",
+						"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1dWlkIjoxNTczNTUwMTI4MzM4LCJleHAiOjE2MTAwMDMyMzN9.-cI1M39pCzEptLr-SqU6Lpf4Yf-OAmDA4U0sDA5Vmjw",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{BASE_URL}}/api/v1/core/assets/7002106/contents/8000317",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"core",
+						"assets",
+						"7002106",
+						"contents",
+						"8000317"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
